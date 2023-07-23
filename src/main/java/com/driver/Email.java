@@ -18,12 +18,21 @@ public class Email {
         return password;
     }
 
-    public void changePassword(String oldPassword, String newPassword){
+    public boolean changePassword(String oldPassword, String newPassword){
         //Change password only if the oldPassword is equal to current password and the new password meets all of the following:
         // 1. It contains at least 8 characters
         // 2. It contains at least one uppercase letter
         // 3. It contains at least one lowercase letter
         // 4. It contains at least one digit
         // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
+
+        if(oldPassword.equals(this.password) && isValidPassword(newPassword)) {
+            this.password=newPassword;
+            return true;
+        }
+        return false;
+    }
+    private boolean isValidPassword(String password){
+        return password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}$");
     }
 }
